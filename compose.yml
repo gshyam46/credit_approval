@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: credit_approval
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8080 credit_approval.wsgi:application
+    volumes:
+      - .:/app
+      - ./customers/customerData:/app/customers/customerData
+      - ./loans/loanData:/app/loans/loanData
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+
