@@ -39,6 +39,7 @@ This project includes a Dockerfile for containerizing the Django app.
 
 dockerfile
 
+download docker web applicaition from its official site, install and run it
 
 # Dockerfile
 
