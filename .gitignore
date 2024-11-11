@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django migrations
+*/migrations/*
+
+# Database
+*.sqlite3
+
+# Logs
+*.log
+
+# Local environment variables
+.env
+
+# Unit test / coverage reports
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# macOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# Pyre type checker
+.pyre/
+
+# Docker files
+*.env
+compose.yml
+postgres_data/
+
+# Ignore files in any data folder (e.g., ingestion files)
+data/
+
+# Other files to ignore
+*.bak
+*.swp
+*~
