@@ -33,6 +33,7 @@ class RegisterCustomer(APIView):
         serializer = CustomerSerializer(data=request.data)
         if serializer.is_valid():
             monthly_salary = serializer.validated_data.get('monthly_salary')
+            customer_id = serializer.validated_data.get('customer_id')
             serializer.save(approved_limit=round(36 * monthly_salary, -5))
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
