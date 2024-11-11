@@ -13,7 +13,7 @@ class IngestLoanDataView(APIView):
     def get(self, request):
         try:
             # Load data from Excel file
-            df = pd.read_excel('/app/loans/data/loan_data.xlsx')
+            df = pd.read_excel('/app/loans/loanData/loan_data.xlsx')
 
             # Iterate over DataFrame rows and add loans to the database
             for _, row in df.iterrows():

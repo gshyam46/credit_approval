@@ -11,7 +11,8 @@ class IngestCustomerDataView(APIView):
     def get(self, request):
         try:
             # Load data from Excel file
-            df = pd.read_excel('/app/customers/data/customer_data.xlsx')
+            df = pd.read_excel(
+                '/app/customers/customerData/customer_data.xlsx')
 
             # Iterate over DataFrame rows and add customers to the database
             for _, row in df.iterrows():
