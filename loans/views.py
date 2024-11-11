@@ -13,23 +13,24 @@ class IngestLoanDataView(APIView):
     def get(self, request):
         try:
             # Load data from Excel file
-            # Update with actual file path
-            df = pd.read_excel('./data/loan_data.xlsx')
+            df = pd.read_excel('/app/loans/data/loan_data.xlsx')
 
             # Iterate over DataFrame rows and add loans to the database
             for _, row in df.iterrows():
-                customer = Customer.objects.get(customer_id=row['customer id'])
+                if pd.isnull(row[['Customer ID', 'Loan ID', 'Loan Amount', 'Tenure', 'Interest Rate', 'Monthly payment', 'EMIs paid on Time', 'Date of Approval', 'End Date']]).any():
+                    continue  # Skip rows with any null values
+                customer = Customer.objects.get(customer_id=row['Customer ID'])
                 Loan.objects.get_or_create(
-                    loan_id=row['loan id'],
+                    loan_id=row['Loan ID'],
                     defaults={
                         "customer": customer,
-                        "loan_amount": row['loan amount'],
-                        "tenure": row['tenure'],
-                        "interest_rate": row['interest rate'],
-                        "monthly_repayment": row['monthly repayment (emi)'],
-                        "emis_paid_on_time": row['EMIs paid on time'],
-                        "start_date": row['start date'],
-                        "end_date": row['end date'],
+                        "loan_amount": row['Loan Amount'],
+                        "tenure": row['Tenure'],
+                        "interest_rate": row['Interest Rate'],
+                        "monthly_repayment": row['Monthly payment'],
+                        "emis_paid_on_time": row['EMIs paid on Time'],
+                        "start_date": row['Date of Approval'],
+                        "end_date": row['End Date'],
                     }
                 )
 

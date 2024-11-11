@@ -11,22 +11,17 @@ class IngestCustomerDataView(APIView):
     def get(self, request):
         try:
             # Load data from Excel file
-            df = pd.read_excel('./data/customer_data.xlsx')
+            df = pd.read_excel('/app/customers/data/customer_data.xlsx')
 
             # Iterate over DataFrame rows and add customers to the database
             for _, row in df.iterrows():
+                # Check if any required value is null
+                if pd.isnull(row[['Customer ID', 'First Name', 'Last Name', 'Phone Number', 'Age', 'Monthly Salary', 'Approved Limit']]).any():
+                    continue
+                # Skip rows with any null values
                 Customer.objects.get_or_create(
-                    customer_id=row['customer_id'],
-                    defaults={
-                        "first_name": row['first_name'],
-                        "last_name": row['last_name'],
-                        "phone_number": row['phone_number'],
-                        "monthly_salary": row['monthly_salary'],
-                        "approved_limit": row['approved_limit'],
-                        "current_debt": row['current_debt'],
-                    }
-                )
-
+                    customer_id=row['Customer ID'], defaults={"first_name": row['First Name'], "last_name": row['Last Name'], "phone_number": row[
+                        'Phone Number'], "age": row['Age'], "monthly_salary": row['Monthly Salary'], "approved_limit": row['Approved Limit'], "current_debt": row.get('Current Debt', 0), })
             return Response({"message": "Customer data ingested successfully"}, status=status.HTTP_201_CREATED)
 
         except Exception as e:

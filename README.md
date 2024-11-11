@@ -73,6 +73,19 @@ EXPOSE 8080
 
 # Run the Django application
 
+docker-compose up --build
+-- then in another terminal
+docker-compose exec web python manage.py makemigrations
+docker-compose exec web python manage.py migrate
+or
+
+- not recommended
+  (docker build -t credit_approval .
+  docker run -p 8080:8080 credit_approval)
+
+# you can test using postman
+
+optional if you make changes
 Step 1: Create Migrations
 Run the following command to create migrations for your Django app:
 
