@@ -1,4 +1,4 @@
-Credit Approval System
+# Credit Approval System
 This project is a backend API for a Credit Approval System. The application enables customer and loan management with functionalities for checking credit eligibility, creating loans, and retrieving customer and loan details. The project is built using Django and Django REST Framework, with PostgreSQL as the database, and is fully containerized using Docker.
 
 Project Structure
@@ -18,20 +18,18 @@ Prerequisites
 Ensure that you have the following installed:
 
 Docker and Docker Compose
-Python 3.9 or above (if running locally without Docker)
+3.11.9
 Pandas and Openpyxl packages for data ingestion from Excel files (these are included in requirements.txt)
 Installation and Setup
 
 1. Clone the Repository
-   bash
-   Copy code
+
    git clone (https://github.com/gshyam46/credit_approval.git)
    cd credit_approval
 2. Environment Variables
    Create a .env file in the root directory to store environment variables for the database and Django settings. Example:
 
-plaintext
-Copy code
+
 POSTGRES_DB=credit_approval
 POSTGRES_USER=user
 POSTGRES_PASSWORD=password
@@ -40,7 +38,7 @@ Dockerfile
 This project includes a Dockerfile for containerizing the Django app.
 
 dockerfile
-Copy code
+
 
 # Dockerfile
 
@@ -103,8 +101,7 @@ docker run -p 8080:8080 credit_approval
 
 To orchestrate the application and PostgreSQL services, use the docker-compose.yml file.
 
-yaml
-Copy code
+
 version: '3'
 
 services:
@@ -127,8 +124,7 @@ volumes:
 postgres_data: 4. Run Docker Containers
 To build and start the Docker containers, use:
 
-bash
-Copy code
+
 docker-compose up --build
 This command will:
 
@@ -225,17 +221,14 @@ Running the Application without Docker
 If you prefer to run the project locally:
 
 Set up a virtual environment and activate it.
-bash
-Copy code
+
 python -m venv env
 source env/bin/activate # On Windows use `env\Scripts\activate`
 Install dependencies.
-bash
-Copy code
+
 pip install -r requirements.txt
 Apply migrations and start the server.
-bash
-Copy code
+
 python manage.py migrate
 python manage.py runserver
 Accessing the Django Admin
